@@ -33,7 +33,7 @@ async function mostrarCarrito() {
 
     // Crea un array de promesas para buscar los detalles de todos los productos del carrito
     const promesasProductos = carrito.map(item => 
-        fetch(`http://localhost:4000/api/productos/${item.id}`).then(res => res.json())
+        fetch(`https://cosmifactura-backend.onrender.com/api/productos/${item.id}`).then(res => res.json())
     );
 
     // Espera a que todas las peticiones a la API se completen
