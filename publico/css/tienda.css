@@ -1,0 +1,136 @@
+/* --- Fuentes e Importaciones --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+/* --- Paleta de Colores y Variables Globales --- */
+:root {
+    --color-primario: #8A7999; /* Un lavanda suave y elegante */
+    --color-acento: #A8D8C9;   /* Un menta fresco para detalles */
+    --color-fondo: #F8F7FC;    /* Un blanco roto muy claro */
+    --color-texto: #333138;    /* Un gris oscuro, no negro puro */
+    --sombra-suave: 0 4px 15px rgba(0, 0, 0, 0.07);
+    --fuente-cuerpo: 'Inter', sans-serif;
+    --fuente-titulos: 'Playfair Display', serif;
+}
+
+/* --- Estilos Generales --- */
+body {
+    font-family: var(--fuente-cuerpo);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: var(--fuente-titulos);
+    color: var(--color-texto);
+}
+
+/* --- Barra de Navegación --- */
+.navbar {
+    background-color: #fff !important; /* Fondo blanco para un look limpio */
+    box-shadow: var(--sombra-suave);
+}
+
+.navbar-brand {
+    color: var(--color-primario) !important;
+    font-weight: 700;
+}
+
+/* --- Botones --- */
+.btn-primary {
+    background-color: var(--color-primario);
+    border-color: var(--color-primario);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #716182; /* Un tono más oscuro del primario */
+    border-color: #716182;
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-suave);
+}
+
+.btn-outline-primary {
+    color: var(--color-primario);
+    border-color: var(--color-primario);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--color-primario);
+    color: #fff;
+}
+
+
+/* --- Tarjetas de Producto (Catálogo) --- */
+.card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden; /* Asegura que la imagen respete los bordes redondeados */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    height: 220px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    font-family: var(--fuente-cuerpo);
+    font-weight: 600;
+    font-size: 1.1rem;
+    height: 44px; /* Altura para 2 líneas de texto */
+    margin-bottom: 0.5rem;
+}
+
+.card-text.fw-bold { /* Estilo del precio */
+    font-family: var(--fuente-cuerpo);
+    font-size: 1.3rem;
+    color: var(--color-primario);
+}
+
+/* --- Filtros de Categoría --- */
+#filtros-categoria .btn {
+    border-radius: 20px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+}
+
+#filtros-categoria .btn.active {
+    background-color: var(--color-primario);
+    color: #fff;
+}
+
+
+/* --- Página de Detalle del Producto --- */
+#detalle-producto h1 {
+    font-size: 3rem;
+}
+#detalle-producto .lead {
+    color: var(--color-acento);
+    font-weight: 600;
+    font-family: var(--fuente-cuerpo);
+}
+#detalle-producto .display-4 {
+    color: var(--color-primario);
+    font-family: var(--fuente-cuerpo);
+    font-weight: 700;
+}
+
+
+/* --- Página del Carrito --- */
+#items-carrito-container .card {
+    border: 1px solid #e9ecef;
+}
+#items-carrito-container .card-title {
+    height: auto; /* Quitamos altura fija en el carrito */
+}

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - CosmiFactura</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg" style="background-color: var(--c-rosa-claro);">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="font-family: var(--f-titulos); color: var(--c-morado-pastel);">CosmiFactura</a>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="productos-tab" data-bs-toggle="tab" data-bs-target="#productos-pane" type="button" role="tab">📦 Productos</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="clientes-tab" data-bs-toggle="tab" data-bs-target="#clientes-pane" type="button" role="tab">👥 Clientes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="facturacion-tab" data-bs-toggle="tab" data-bs-target="#facturacion-pane" type="button" role="tab">🧾 Facturación</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="historial-tab" data-bs-toggle="tab" data-bs-target="#historial-pane" type="button" role="tab">📈 Historial</button>
+            </li>
+        </ul>
+
+        <div class="tab-content card" id="myTabContent">
+            
+            <div class="tab-pane fade show active p-4" id="productos-pane" role="tabpanel">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2>Gestión de Productos</h2>
+                    <button class="btn btn-principal" data-bs-toggle="modal" data-bs-target="#agregarProductoModal">Agregar Producto</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaProductos"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-pane fade p-4" id="clientes-pane" role="tabpanel">
+                 <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2>Gestión de Clientes</h2>
+                    <button class="btn btn-principal" data-bs-toggle="modal" data-bs-target="#agregarClienteModal">Nuevo Cliente</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Teléfono</th>
+                                <th>Cédula</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaClientes"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-pane fade p-4" id="facturacion-pane" role="tabpanel">
+                <h2>Nueva Factura</h2>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label for="seleccionarCliente" class="form-label">Seleccionar Cliente</label>
+                        <select id="seleccionarCliente" class="form-select"></select>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="buscarProductoFactura" class="form-label">Buscar Producto</label>
+                        <input type="text" id="buscarProductoFactura" class="form-control" placeholder="Escribe para buscar..." list="sugerencias-productos">
+                        <datalist id="sugerencias-productos"></datalist>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="cantidadProductoFactura" class="form-label">Cantidad</label>
+                        <input type="number" id="cantidadProductoFactura" class="form-control" value="1" min="1">
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button type="button" id="btnAnadirProducto" class="btn btn-primary w-100">Añadir</button>
+                    </div>
+                </div>
+                <hr>
+                <h4>Items de la Factura</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unit.</th>
+                                <th>Subtotal</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="itemsFactura"></tbody>
+                    </table>
+                </div>
+                <div class="text-end">
+                    <h3>Total: <span id="totalFactura">$0.00</span></h3>
+                    <button id="generarFacturaBtn" class="btn btn-success btn-lg mt-3">Generar Factura y PDF</button>
+                </div>
+            </div>
+
+             <div class="tab-pane fade p-4" id="historial-pane" role="tabpanel">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2>Historial de Facturas</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>N° Factura</th>
+                                <th>Fecha</th>
+                                <th>Cliente</th>
+                                <th>Total</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaFacturas"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="agregarProductoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><h1 class="modal-title fs-5">Nuevo Producto</h1><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <form id="formAgregarProducto">
+                        <div class="mb-3"><label for="nombreProducto" class="form-label">Nombre</label><input type="text" class="form-control" id="nombreProducto" required></div>
+                        <div class="mb-3"><label for="categoriaProducto" class="form-label">Categoría</label><input type="text" class="form-control" id="categoriaProducto"></div>
+                        <div class="mb-3"><label for="precioProducto" class="form-label">Precio</label><input type="number" step="0.01" class="form-control" id="precioProducto" required></div>
+                        <div class="mb-3"><label for="stockProducto" class="form-label">Stock</label><input type="number" class="form-control" id="stockProducto" required></div>
+                        <div class="mb-3"><label for="imagenProducto" class="form-label">URL de Imagen</label><input type="text" class="form-control" id="imagenProducto"></div>
+                        <div class="mb-3"><label for="descripcionProducto" class="form-label">Descripción</label><textarea class="form-control" id="descripcionProducto" rows="3"></textarea></div>
+                        <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-primary">Guardar Producto</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editarProductoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><h1 class="modal-title fs-5">Editar Producto</h1><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <form id="formEditarProducto">
+                        <input type="hidden" id="editProductoId">
+                        <div class="mb-3"><label for="editNombreProducto" class="form-label">Nombre</label><input type="text" class="form-control" id="editNombreProducto" required></div>
+                        <div class="mb-3"><label for="editCategoriaProducto" class="form-label">Categoría</label><input type="text" class="form-control" id="editCategoriaProducto"></div>
+                        <div class="mb-3"><label for="editPrecioProducto" class="form-label">Precio</label><input type="number" step="0.01" class="form-control" id="editPrecioProducto" required></div>
+                        <div class="mb-3"><label for="editStockProducto" class="form-label">Stock</label><input type="number" class="form-control" id="editStockProducto" required></div>
+                        <div class="mb-3"><label for="editImagenProducto" class="form-label">URL de Imagen</label><input type="text" class="form-control" id="editImagenProducto"></div>
+                        <div class="mb-3"><label for="editDescripcionProducto" class="form-label">Descripción</label><textarea class="form-control" id="editDescripcionProducto" rows="3"></textarea></div>
+                        <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-primary">Guardar Cambios</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="agregarClienteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><h1 class="modal-title fs-5">Nuevo Cliente</h1><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <form id="formAgregarCliente">
+                        <div class="mb-3"><label for="nombreCliente" class="form-label">Nombre Completo</label><input type="text" class="form-control" id="nombreCliente" required></div>
+                        <div class="mb-3"><label for="cedulaCliente" class="form-label">Cédula o NIT</label><input type="text" class="form-control" id="cedulaCliente"></div>
+                        <div class="mb-3"><label for="correoCliente" class="form-label">Correo Electrónico</label><input type="email" class="form-control" id="correoCliente"></div>
+                        <div class="mb-3"><label for="telefonoCliente" class="form-label">Teléfono</label><input type="tel" class="form-control" id="telefonoCliente"></div>
+                        <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-primary">Guardar Cliente</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editarClienteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><h1 class="modal-title fs-5">Editar Cliente</h1><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <form id="formEditarCliente">
+                        <input type="hidden" id="editClienteId">
+                        <div class="mb-3"><label for="editNombreCliente" class="form-label">Nombre Completo</label><input type="text" class="form-control" id="editNombreCliente" required></div>
+                        <div class="mb-3"><label for="editCedulaCliente" class="form-label">Cédula o NIT</label><input type="text" class="form-control" id="editCedulaCliente"></div>
+                        <div class="mb-3"><label for="editCorreoCliente" class="form-label">Correo Electrónico</label><input type="email" class="form-control" id="editCorreoCliente"></div>
+                        <div class="mb-3"><label for="editTelefonoCliente" class="form-label">Teléfono</label><input type="tel" class="form-control" id="editTelefonoCliente"></div>
+                        <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-primary">Guardar Cambios</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

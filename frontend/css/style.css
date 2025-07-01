@@ -1,0 +1,33 @@
+:root {
+    --c-rosa-claro: #FADADD;
+    --c-morado-pastel: #D0B4DE;
+    --c-dorado: #F9E4B7;
+    --c-texto: #333;
+    --f-principal: 'Poppins', sans-serif;
+    --f-titulos: 'Montserrat', sans-serif;
+}
+
+body {
+    font-family: var(--f-principal);
+    background-color: #fef9f8;
+}
+
+.btn-principal {
+    background-color: var(--c-morado-pastel);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 600;
+}
+
+.btn-principal:hover {
+    opacity: 0.9;
+    color: white;
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: none;
+}
