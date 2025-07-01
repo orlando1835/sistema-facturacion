@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 async function cargarDetalleProducto(id) {
     try {
-        const response = await fetch(`http://localhost:4000/api/productos/${id}`);
+        const response = await fetch(`https://cosmifactura-backend.onrender.com/api/productos/${id}`);
         if (!response.ok) {
             throw new Error('Producto no encontrado');
         }
