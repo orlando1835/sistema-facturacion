@@ -1,9 +1,9 @@
 module.exports = {
     db: {
-        host: 'localhost',
-        user: 'root', // Usuario por defecto en XAMPP
-        password: 'Certi123', // Contraseña por defecto en XAMPP es vacía
-        database: 'cosmifactura_db'
+        host: 'sql10.freesqldatabase.com',
+        user: 'sql10787827', // Usuario por defecto en XAMPP
+        password: 'w74uiSLUdi', // Contraseña por defecto en XAMPP es vacía
+        database: 'sql10787827'
     },
     jwt: {
         secret: 'tu_secreto_super_secreto_para_jwt'
