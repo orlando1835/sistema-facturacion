@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 async function cargarCategorias() {
     try {
-        const response = await fetch('http://localhost:4000/api/productos/categorias');
+        const response = await fetch('https://cosmifactura-backend.onrender.com/api/productos/categorias');
         const categorias = await response.json();
         const filtrosDiv = document.getElementById('filtros-categoria');
         if (!filtrosDiv) return; // Si no está el div de filtros, no hace nada
@@ -51,7 +51,7 @@ async function cargarCategorias() {
  */
 async function cargarCatalogo(categoria = null) {
     try {
-        const response = await fetch('http://localhost:4000/api/productos');
+        const response = await fetch('https://cosmifactura-backend.onrender.com/api/productos');
         if (!response.ok) throw new Error('No se pudo cargar el catálogo.');
         
         let productos = await response.json();
