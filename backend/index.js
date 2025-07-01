@@ -1,3 +1,11 @@
+const mysql = require('mysql2/promise'); // ya la tienes
+const config = require('./config/config'); // ya la tienes
+
+// Cambia la función getConnection que tienes en todos tus archivos de rutas
+// para que use directamente los datos de config, que ahora leerán las variables de entorno.
+async function getConnection() {
+    return await mysql.createConnection(config.db);
+}
 const express = require('express');
 const cors = require('cors');
 const app = express();
