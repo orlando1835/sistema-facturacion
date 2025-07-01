@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 async function cargarProductosDestacados() {
     try {
-        const response = await fetch('http://localhost:4000/api/productos');
+        const response = await fetch('https://cosmifactura-backend.onrender.com/api/productos');
         if (!response.ok) throw new Error('No se pudo cargar el catálogo.');
         
         let productos = await response.json();
