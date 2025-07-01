@@ -33,7 +33,7 @@ document.getElementById('historial-tab').addEventListener('click', () => cargarH
 
 async function cargarProductos() {
     try {
-        const response = await fetch('http://localhost:4000/api/productos', {
+        const response = await fetch('https://cosmifactura-backend.onrender.com/api/productos', {
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         if (!response.ok) throw new Error('Error al cargar productos');
@@ -79,7 +79,7 @@ document.getElementById('formAgregarProducto').addEventListener('submit', async 
         descripcion: document.getElementById('descripcionProducto').value
     };
     try {
-        await fetch('http://localhost:4000/api/productos', {
+        await fetch('https://cosmifactura-backend.onrender.com/api/productos', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
             body: JSON.stringify(producto)
@@ -92,7 +92,7 @@ document.getElementById('formAgregarProducto').addEventListener('submit', async 
 
 async function abrirModalEditar(id) {
     try {
-        const response = await fetch('http://localhost:4000/api/productos', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+        const response = await fetch('https://cosmifactura-backend.onrender.com/api/productos', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
         const productos = await response.json();
         const producto = productos.find(p => p.id == id);
         if (!producto) return;
@@ -120,7 +120,7 @@ document.getElementById('formEditarProducto').addEventListener('submit', async f
         descripcion: document.getElementById('editDescripcionProducto').value
     };
     try {
-        await fetch(`http://localhost:4000/api/productos/${id}`, {
+        await fetch(`https://cosmifactura-backend.onrender.com/api/productos/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
             body: JSON.stringify(datos)
@@ -132,7 +132,7 @@ document.getElementById('formEditarProducto').addEventListener('submit', async f
 
 async function eliminarProducto(id) {
     try {
-        await fetch(`http://localhost:4000/api/productos/${id}`, {
+        await fetch(`https://cosmifactura-backend.onrender.com/api/productos/${id}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
@@ -145,7 +145,7 @@ async function eliminarProducto(id) {
 
 async function cargarClientes() {
     try {
-        const response = await fetch('http://localhost:4000/api/clientes', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+        const response = await fetch('https://cosmifactura-backend.onrender.com/api/clientes', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
         if (!response.ok) throw new Error('Error al cargar clientes');
         const clientes = await response.json();
         const tbody = document.getElementById('listaClientes');
@@ -187,7 +187,7 @@ document.getElementById('formAgregarCliente').addEventListener('submit', async f
         telefono: document.getElementById('telefonoCliente').value
     };
     try {
-        await fetch('http://localhost:4000/api/clientes', {
+        await fetch('https://cosmifactura-backend.onrender.com/api/clientes', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
             body: JSON.stringify(cliente)
@@ -200,7 +200,7 @@ document.getElementById('formAgregarCliente').addEventListener('submit', async f
 
 async function abrirModalEditarCliente(id) {
     try {
-        const response = await fetch('http://localhost:4000/api/clientes', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+        const response = await fetch('https://cosmifactura-backend.onrender.com/api/clientes', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
         const clientes = await response.json();
         const cliente = clientes.find(c => c.id == id);
         if (!cliente) return;
@@ -224,7 +224,7 @@ document.getElementById('formEditarCliente').addEventListener('submit', async fu
         telefono: document.getElementById('editTelefonoCliente').value,
     };
     try {
-        await fetch(`http://localhost:4000/api/clientes/${id}`, {
+        await fetch(`https://cosmifactura-backend.onrender.com/api/clientes/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
             body: JSON.stringify(datos)
@@ -236,7 +236,7 @@ document.getElementById('formEditarCliente').addEventListener('submit', async fu
 
 async function eliminarCliente(id) {
     try {
-        await fetch(`http://localhost:4000/api/clientes/${id}`, {
+        await fetch(`https://cosmifactura-backend.onrender.com/api/clientes/${id}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
@@ -249,7 +249,7 @@ async function eliminarCliente(id) {
 
 async function popularDropdownClientes() {
     try {
-        const response = await fetch('http://localhost:4000/api/clientes', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+        const response = await fetch('https://cosmifactura-backend.onrender.com/api/clientes', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
         if (!response.ok) throw new Error('No se pudieron cargar los clientes');
         const clientes = await response.json();
         const selectCliente = document.getElementById('seleccionarCliente');
@@ -265,7 +265,7 @@ async function popularDropdownClientes() {
 
 async function cargarSugerenciasProductos() {
     try {
-        const response = await fetch('http://localhost:4000/api/productos', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+        const response = await fetch('https://cosmifactura-backend.onrender.com/api/productos', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
         if (!response.ok) throw new Error('No se pudieron cargar las sugerencias');
         const productos = await response.json();
         const datalist = document.getElementById('sugerencias-productos');
@@ -285,7 +285,7 @@ document.getElementById('btnAnadirProducto').addEventListener('click', async () 
 
     facturaActual.clienteId = document.getElementById('seleccionarCliente').value;
     try {
-        const response = await fetch('http://localhost:4000/api/productos', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+        const response = await fetch('https://cosmifactura-backend.onrender.com/api/productos', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
         const productos = await response.json();
         const productoEncontrado = productos.find(p => p.nombre && p.nombre.toLowerCase().includes(nombreProductoBuscado.toLowerCase()));
         if (!productoEncontrado) return alert('Producto no encontrado.');
@@ -335,7 +335,7 @@ document.getElementById('generarFacturaBtn').addEventListener('click', async () 
     if (!facturaActual.clienteId) return alert('Por favor, selecciona un cliente.');
     if (facturaActual.items.length === 0) return alert('No hay productos en la factura.');
     try {
-        const response = await fetch('http://localhost:4000/api/facturacion/generar', {
+        const response = await fetch('https://cosmifactura-backend.onrender.com/api/facturacion/generar', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
             body: JSON.stringify(facturaActual)
@@ -367,7 +367,7 @@ document.getElementById('generarFacturaBtn').addEventListener('click', async () 
 
 async function cargarHistorialFacturas() {
     try {
-        const response = await fetch('http://localhost:4000/api/facturacion/historial', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+        const response = await fetch('https://cosmifactura-backend.onrender.com/api/facturacion/historial', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
         if (!response.ok) throw new Error('No se pudo cargar el historial.');
         const facturas = await response.json();
         const tbody = document.getElementById('listaFacturas');
@@ -391,7 +391,7 @@ document.getElementById('listaFacturas').addEventListener('click', async (e) => 
     if (e.target && e.target.classList.contains('btn-ver-pdf')) {
         const facturaId = e.target.getAttribute('data-id');
         try {
-            const response = await fetch(`http://localhost:4000/api/facturacion/pdf/${facturaId}`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+            const response = await fetch(`https://cosmifactura-backend.onrender.com/api/facturacion/pdf/${facturaId}`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
             if (!response.ok) throw new Error('No se pudo descargar el PDF.');
             const pdfBlob = await response.blob();
             const url = window.URL.createObjectURL(pdfBlob);
